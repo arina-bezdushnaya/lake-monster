@@ -9,6 +9,7 @@ import {
   Result,
 } from './styled';
 import {WinModal} from '../win-modal';
+import {ScoreTable} from '../score-table';
 
 interface Props {
   whoWin: string;
@@ -80,6 +81,8 @@ export const Control = (props: Props) => {
       </Clue>
 
       {result()}
+
+      <ScoreTable />
 
       <WinModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </ControlContainer>

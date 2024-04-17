@@ -14,7 +14,9 @@ export const ScoreTable = () => {
         return value > 3 ? (
           <NoMedal>{value}</NoMedal>
         ) : (
-          <Medal value={value}>{value}</Medal>
+          <Medal value={value}>
+            <span>{value}</span>
+          </Medal>
         );
       },
     },
@@ -43,13 +45,17 @@ export const ScoreTable = () => {
   let lastScore = JSON.parse(personalScore || '{}');
   lastScore = personalScore ? [lastScore] : [];
 
-  const dataSource = [...mockData, ...lastScore].map((row, index) => {
-    return {...row, no: index + 1, key: index + 1};
-  });
+  const dataSource = [...mockData, ...lastScore]
+    .sort((a: TableRow, b: TableRow) => b.ratio - a.ratio)
+    .map((row, index) => {
+      return {...row, no: index + 1, key: index + 1};
+    });
 
   const getData = (current: number, pageSize: number) => {
     return dataSource.slice((current - 1) * pageSize, current * pageSize);
   };
+
+  const defaultPageSize = window.innerHeight < 700 ? 2 : 5;
 
   return (
     <>
@@ -57,7 +63,7 @@ export const ScoreTable = () => {
         dataSource={dataSource}
         columns={columns}
         pagination={{
-          defaultPageSize: 5,
+          defaultPageSize,
           showSizeChanger: true,
           pageSizeOptions: ['2', '5'],
           onChange: (page: number, pageSize: number) => getData(page, pageSize),

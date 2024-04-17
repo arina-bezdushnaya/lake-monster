@@ -1,15 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   CurrentSpeed,
   ControlContainer,
+  SidebarContainer,
+  SpeedHandle,
   Problem,
   ClueCheckbox,
   Clue,
   ClueLabel,
-  Result
-} from "./styled";
-import { WinModal } from "../win-modal";
-import { ScoreTable } from "../score-table";
+  Result,
+  TableContainer,
+} from './styled';
+import {WinModal} from '../win-modal';
+import {ScoreTable} from '../score-table';
 
 interface Props {
   whoWin: string;
@@ -29,7 +32,7 @@ export const Control = (props: Props) => {
     isShowClue,
     toggleClue,
     isModalOpen,
-    setIsModalOpen
+    setIsModalOpen,
   } = props;
 
   const handleSpeedChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,9 +45,9 @@ export const Control = (props: Props) => {
 
   const result = () => {
     switch (whoWin) {
-      case "you":
+      case 'you':
         return <Result youWin>You win!!!</Result>;
-      case "wolf":
+      case 'wolf':
         return <Result>The Wolf ate you :(</Result>;
       default:
         return <div />;
@@ -52,39 +55,50 @@ export const Control = (props: Props) => {
   };
 
   return (
-    <ControlContainer>
+    <SidebarContainer>
       <Problem>
         The Wolf wants to eat you. You need to escape. If you can touch shore
         even for a moment without the Wolf already being upon you, you win. You
         can set how many times the Wolf moves faster than you.
       </Problem>
 
-      <CurrentSpeed>Speed ratio: {speed}</CurrentSpeed>
-      <input
-        type="range"
-        max={4}
-        min={1}
-        defaultValue={speed}
-        onChange={handleSpeedChanged}
-        step="0.1"
-      />
-      <br />
+      <ControlContainer>
+        <SpeedHandle>
+          <CurrentSpeed>Speed ratio: {speed}</CurrentSpeed>
+          <input
+            type="range"
+            max={4}
+            min={1}
+            defaultValue={speed}
+            onChange={handleSpeedChanged}
+            step="0.1"
+          />
+          <br />
+        </SpeedHandle>
 
-      <Clue>
-        <ClueCheckbox
-          type="checkbox"
-          id="clue"
-          checked={isShowClue}
-          onChange={handleShowClue}
-        />
-        <ClueLabel htmlFor="clue">Show clue</ClueLabel>
-      </Clue>
+        <Clue>
+          <ClueCheckbox
+            type="checkbox"
+            id="clue"
+            checked={isShowClue}
+            onChange={handleShowClue}
+          />
+          <ClueLabel htmlFor="clue">Show clue</ClueLabel>
+        </Clue>
+      </ControlContainer>
 
       {result()}
 
-      <ScoreTable />
+      <TableContainer>
+        <ScoreTable />
+      </TableContainer>
 
-      <WinModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} ratio={speed} clue={isShowClue} />
-    </ControlContainer>
+      <WinModal
+        isOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        ratio={speed}
+        clue={isShowClue}
+      />
+    </SidebarContainer>
   );
 };

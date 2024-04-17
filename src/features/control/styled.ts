@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components/macro";
-import { color } from "../../theme";
+import styled, {css} from 'styled-components/macro';
+import {color} from '../../theme';
 
 const rangeThumb = css`
   box-shadow: 1px 1px 1px ${color.black}, 0 0 1px #0d0d0d;
@@ -23,7 +23,7 @@ const rangeTrack = css`
   border: 0.2px solid #010101;
 `;
 
-export const ControlContainer = styled.div`
+export const SidebarContainer = styled.div`
   min-width: 350px;
   padding-left: 40px;
 
@@ -84,6 +84,21 @@ export const ControlContainer = styled.div`
   }
 `;
 
+export const ControlContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+`;
+
+export const SpeedHandle = styled.div`
+  width: 50%;
+`;
+
+export const TableContainer = styled.div`
+  position: absolute;
+  top: 300px;
+`;
+
 export const CurrentSpeed = styled.div`
   display: flex;
   font-size: 16px;
@@ -119,9 +134,9 @@ export const ClueCheckbox = styled.input`
   accent-color: ${color.primary};
 `;
 
-export const Result = styled.div<{ youWin?: boolean }>`
-  padding-bottom: 20px;
-  color: ${p => (!!p.youWin ? "#1cbd00" : "red")};
+export const Result = styled.div<{youWin?: boolean}>`
+  padding: 20px 0;
+  color: ${p => (!!p.youWin ? '#1cbd00' : 'red')};
   font-size: 24px;
   font-weight: 600;
 `;

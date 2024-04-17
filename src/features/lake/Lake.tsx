@@ -1,20 +1,20 @@
-import {Stage, Layer, Group, Circle, Image as ImageKonva} from 'react-konva';
-import Konva from 'konva';
+import { Stage, Layer, Group, Circle, Image as ImageKonva } from "react-konva";
+import Konva from "konva";
 import KonvaEventObject = Konva.KonvaEventObject;
-import Wolf from '../../assets/images/wolf.png';
-import User from '../../assets/images/hare-boat.png';
-import LakeImg from '../../assets/images/lake.png';
-import {StageContainer} from './styled';
+import Wolf from "../../assets/images/wolf.png";
+import User from "../../assets/images/hare-boat.png";
+import LakeImg from "../../assets/images/lake.png";
+import { StageContainer } from "./styled";
 
 interface Props {
   speed: number;
+  isShowClue: boolean;
   setWinner: (winner: string) => void;
   setIsModalOpen: (isOpen: boolean) => void;
-  isShowClue: boolean;
 }
 
 export const Lake = (props: Props) => {
-  const {setWinner, speed, isShowClue, setIsModalOpen} = props;
+  const { setWinner, speed, isShowClue, setIsModalOpen } = props;
 
   const width = window.innerWidth / 2;
   const height = window.innerHeight;
@@ -36,55 +36,55 @@ export const Lake = (props: Props) => {
   const userOffset =
     width > 500
       ? {
-          x: -25,
-          y: -30,
-        }
+        x: -25,
+        y: -30
+      }
       : {
-          x: -12.5,
-          y: -15,
-        };
+        x: -12.5,
+        y: -15
+      };
 
   const lakeProps = {
     radius: radius,
-    stroke: 'black',
-    strokeWidth: 1,
+    stroke: "black",
+    strokeWidth: 1
   };
   const lakeImageProps = {
     radius: radius,
     width: radius * 2,
     height: radius * 2,
     x: -radius,
-    y: -radius,
+    y: -radius
   };
 
   const predatorProps = {
     scaleX: predatorScale,
     scaleY: predatorScale,
     x: -predatorOffset,
-    y: -radius - predatorOffset,
+    y: -radius - predatorOffset
   };
   const predatorPointProps = {
     x: 0,
-    y: -radius,
+    y: -radius
   };
 
   const userProps = {
     scaleX: userScale,
     scaleY: userScale,
-    ...userOffset,
+    ...userOffset
   };
   const clueProps = {
-    stroke: 'black',
+    stroke: "black",
     strokeWidth: 1,
     radius: radius / speed,
-    dash: [10, 5],
+    dash: [10, 5]
   };
 
   const handleMove = (e: KonvaEventObject<MouseEvent>) => {
     const stage = e.target.getStage();
-    const lakeGroup = stage?.find('Group')[0]! as unknown as any;
+    const lakeGroup = stage?.find("Group")[0]! as unknown as any;
 
-    const {x, y} = lakeGroup.getRelativePointerPosition();
+    const { x, y } = lakeGroup.getRelativePointerPosition();
 
     const [lakeImage, lake] = lakeGroup.children[0].children;
     const [predator, predatorPoint] = lakeGroup.children[1].children;
@@ -95,13 +95,13 @@ export const Lake = (props: Props) => {
 
     const kUser = Math.sqrt(radiusSqr / lakeRadiusSqr);
 
-    const boatPrevious = {x: boatPoint.attrs.x, y: boatPoint.attrs.y};
+    const boatPrevious = { x: boatPoint.attrs.x, y: boatPoint.attrs.y };
     const predatorPointPrevious = {
       x: predatorPoint.attrs.x,
-      y: predatorPoint.attrs.y,
+      y: predatorPoint.attrs.y
     };
 
-    let boatPointCurrent = {x: 0, y: 0};
+    let boatPointCurrent = { x: 0, y: 0 };
 
     if (radiusSqr <= lakeRadiusSqr) {
       boatPointCurrent.x = x;
@@ -119,7 +119,7 @@ export const Lake = (props: Props) => {
 
     const boatDistance = Math.sqrt(
       Math.pow(boatPointCurrent.x - boatPrevious.x, 2) +
-        Math.pow(boatPointCurrent.y - boatPrevious.y, 2)
+      Math.pow(boatPointCurrent.y - boatPrevious.y, 2)
     );
 
     const predatorMaxDistance = boatDistance * speed;
@@ -138,15 +138,15 @@ export const Lake = (props: Props) => {
       angleDiff < -180
         ? angleDiff + 360
         : angleDiff > 180
-        ? angleDiff - 360
-        : angleDiff;
+          ? angleDiff - 360
+          : angleDiff;
 
     angleDiff =
       angleDiff > predatorMaxAngle
         ? predatorMaxAngle
         : angleDiff < -predatorMaxAngle
-        ? -predatorMaxAngle
-        : angleDiff;
+          ? -predatorMaxAngle
+          : angleDiff;
 
     const angleRad = ((predatorAngleX + angleDiff) * Math.PI) / 180;
     const xPoint = radius * Math.cos(angleRad);
@@ -167,19 +167,26 @@ export const Lake = (props: Props) => {
         xPoint.toFixed(2) === boatPointCurrent.x.toFixed(2) &&
         yPoint.toFixed(2) === boatPointCurrent.y.toFixed(2)
       ) {
-        lake.attrs.stroke = 'red';
+        lake.attrs.stroke = "red";
         lake.attrs.strokeWidth = 3;
-        setWinner('wolf');
+        setWinner("wolf");
       } else {
-        lake.attrs.stroke = 'yellow';
+        lake.attrs.stroke = "yellow";
         lake.attrs.strokeWidth = 3;
-        setWinner('you');
-        setIsModalOpen(true);
+        setWinner("you");
+
+        const personalScore = localStorage.getItem("lake_monster");
+        if (personalScore) {
+          const { ratio } = JSON.parse(personalScore);
+          speed > ratio && setIsModalOpen(true);
+        } else {
+          setIsModalOpen(true);
+        }
       }
     } else {
-      lake.attrs.stroke = 'black';
+      lake.attrs.stroke = "black";
       lake.attrs.strokeWidth = 1;
-      setWinner('');
+      setWinner("");
     }
   };
 
@@ -188,7 +195,7 @@ export const Lake = (props: Props) => {
       <Stage
         width={width}
         height={height - 20}
-        style={{width}}
+        style={{ width }}
         onMouseMove={handleMove}
       >
         <Layer>

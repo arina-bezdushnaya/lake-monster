@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   CurrentSpeed,
   ControlContainer,
@@ -6,18 +6,18 @@ import {
   ClueCheckbox,
   Clue,
   ClueLabel,
-  Result,
-} from './styled';
-import {WinModal} from '../win-modal';
-import {ScoreTable} from '../score-table';
+  Result
+} from "./styled";
+import { WinModal } from "../win-modal";
+import { ScoreTable } from "../score-table";
 
 interface Props {
   whoWin: string;
   speed: number;
-  setSpeed: (speed: number) => void;
   isShowClue: boolean;
-  toggleClue: (isShown: boolean) => void;
   isModalOpen: boolean;
+  setSpeed: (speed: number) => void;
+  toggleClue: (isShown: boolean) => void;
   setIsModalOpen: (isOpen: boolean) => void;
 }
 
@@ -29,7 +29,7 @@ export const Control = (props: Props) => {
     isShowClue,
     toggleClue,
     isModalOpen,
-    setIsModalOpen,
+    setIsModalOpen
   } = props;
 
   const handleSpeedChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,9 +42,9 @@ export const Control = (props: Props) => {
 
   const result = () => {
     switch (whoWin) {
-      case 'you':
+      case "you":
         return <Result youWin>You win!!!</Result>;
-      case 'wolf':
+      case "wolf":
         return <Result>The Wolf ate you :(</Result>;
       default:
         return <div />;
@@ -84,7 +84,7 @@ export const Control = (props: Props) => {
 
       <ScoreTable />
 
-      <WinModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <WinModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} ratio={speed} clue={isShowClue} />
     </ControlContainer>
   );
 };

@@ -1,5 +1,5 @@
-import styled, {css} from 'styled-components/macro';
-import {color} from '../../theme';
+import styled, { css } from "styled-components/macro";
+import { color } from "../../theme";
 
 const rangeThumb = css`
   box-shadow: 1px 1px 1px ${color.black}, 0 0 1px #0d0d0d;
@@ -24,7 +24,7 @@ const rangeTrack = css`
 `;
 
 export const ControlContainer = styled.div`
-  min-width: 200px;
+  min-width: 350px;
   padding-left: 40px;
 
   input[type='range'] {
@@ -119,9 +119,10 @@ export const ClueCheckbox = styled.input`
   accent-color: ${color.primary};
 `;
 
-export const Result = styled.div<{youWin?: boolean}>`
-  color: ${p => (!!p.youWin ? '#1cbd00' : 'red')};
-  font-size: 30px;
+export const Result = styled.div<{ youWin?: boolean }>`
+  padding-bottom: 20px;
+  color: ${p => (!!p.youWin ? "#1cbd00" : "red")};
+  font-size: 24px;
   font-weight: 600;
 `;
 

@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/github.io/lake-monster/static/css/main.441c3a4f.css",
-    "main.js": "/github.io/lake-monster/static/js/main.842681e7.js",
-    "static/media/lake.png": "/github.io/lake-monster/static/media/lake.49b7a9cca4dc0ead3e1c.png",
-    "static/media/forest.jpg": "/github.io/lake-monster/static/media/forest.058777ce1d1cbad774e8.jpg",
-    "static/media/hare-boat.png": "/github.io/lake-monster/static/media/hare-boat.115eb74854a9bdc1747a.png",
-    "static/media/wolf.png": "/github.io/lake-monster/static/media/wolf.ab785a16638d8701620e.png",
-    "index.html": "/github.io/lake-monster/index.html",
-    "main.441c3a4f.css.map": "/github.io/lake-monster/static/css/main.441c3a4f.css.map",
-    "main.842681e7.js.map": "/github.io/lake-monster/static/js/main.842681e7.js.map"
+    "main.css": "/lake-monster/static/css/main.441c3a4f.css",
+    "main.js": "/lake-monster/static/js/main.dee934ca.js",
+    "static/media/lake.png": "/lake-monster/static/media/lake.49b7a9cca4dc0ead3e1c.png",
+    "static/media/forest.jpg": "/lake-monster/static/media/forest.058777ce1d1cbad774e8.jpg",
+    "static/media/hare-boat.png": "/lake-monster/static/media/hare-boat.115eb74854a9bdc1747a.png",
+    "static/media/wolf.png": "/lake-monster/static/media/wolf.ab785a16638d8701620e.png",
+    "index.html": "/lake-monster/index.html",
+    "main.441c3a4f.css.map": "/lake-monster/static/css/main.441c3a4f.css.map",
+    "main.dee934ca.js.map": "/lake-monster/static/js/main.dee934ca.js.map"
   },
   "entrypoints": [
     "static/css/main.441c3a4f.css",
-    "static/js/main.842681e7.js"
+    "static/js/main.dee934ca.js"
   ]
 }

@@ -12,7 +12,7 @@
   ],
   "author": "bezdushnaya",
   "license": "ISC",
-  "homepage": "https://arina-bezdushnaya/github.io/lake-monster",
+  "homepage": "https://arina-bezdushnaya/lake-monster",
   "dependencies": {
     "@types/node": "16.18.91",
     "@types/react": "18.2.67",
